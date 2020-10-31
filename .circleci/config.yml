@@ -1,0 +1,17 @@
+version: 2.1
+
+jobs:
+  foo:
+    docker:
+      - image: circleci/golang:latest
+    parallelism: 4
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker pull hashicorp.jfrog.io/docker/alpine/git
+
+workflows:
+  version: 2
+  circle-test:
+    jobs:
+      - foo
